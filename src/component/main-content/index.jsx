@@ -4,13 +4,14 @@ import { Modal, ModalHeader, ModalBody } from "reactstrap";
 
 import ParticipationForm from "./participation-form";
 import PollForm from "../poll-form";
+import ParticipatorsList from "../poll-participators";
 
 class MainContent extends React.Component {
   state = {
     openModal: false,
   };
 
-  toggleEditModalForm = () => {
+  toggleModalEditForm = () => {
     this.setState({ openModal: !this.state.openModal });
   };
 
@@ -24,7 +25,7 @@ class MainContent extends React.Component {
             create a new poll. To check details of a poll please select from the
             left sidebar. By selecting a poll you can check it's details,
             participate and check others opinions about this poll.
-          </p>
+</p>
         </div>
       );
     }
@@ -38,19 +39,19 @@ class MainContent extends React.Component {
         <ParticipationForm
           poll={poll}
           getParticipantsOpinion={getParticipantsOpinion}
-          toggleEditModalForm={this.toggleEditModalForm}
+          toggleEditModalForm={this.toggleModalEditForm}
           deletePoll={() => deletePoll(poll.id)}
         />
 
         <Modal
           // this modal is for update the poll
           isOpen={this.state.openModal}
-          toggle={this.toggleEditModalForm}
+          toggle={this.toggleModalEditForm}
           unmountOnClose={true}
         >
-          <ModalHeader toggle={this.toggleEditModalForm}>
+          <ModalHeader toggle={this.toggleModalEditForm}>
             Update Poll
-          </ModalHeader>
+</ModalHeader>
           <ModalBody>
             <PollForm
               poll={poll}
@@ -58,10 +59,17 @@ class MainContent extends React.Component {
               submit_Create_Update_Poll={updatePoll}
               // updatePoll func will come by props.
               buttonValue="Update Poll"
+              toggleModalEditForm={this.toggleModalEditForm}
             />
           </ModalBody>
         </Modal>
+
+        <div className="my-4">
+          <ParticipatorsList poll={this.props.poll} />
+        </div>
       </div>
+
+
     );
   }
 }

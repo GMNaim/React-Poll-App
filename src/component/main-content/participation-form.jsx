@@ -89,6 +89,7 @@ class ParticipationForm extends React.Component {
           <Button
             // this button will delete the poll
             type="button"
+            color="danger"
             className="ml-2"
             onClick={() => this.props.deletePoll(this.props.poll.id)}
           >

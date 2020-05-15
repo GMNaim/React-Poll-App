@@ -9,7 +9,7 @@ class SideBar extends React.Component {
   state = {
     openModal: false,
   };
-  toggleModal = () => {
+  toggleModalCreatePollForm = () => {
     this.setState({ openModal: !this.state.openModal });
   };
 
@@ -24,7 +24,11 @@ class SideBar extends React.Component {
             value={this.props.searchTerm}
             onChange={(event) => this.props.handleSearch(event.target.value)}
           />
-          <Button color="success" className="ml-2" onClick={this.toggleModal}>
+          <Button
+            color="success"
+            className="ml-2"
+            onClick={this.toggleModalCreatePollForm}
+          >
             New
           </Button>
         </div>
@@ -36,13 +40,21 @@ class SideBar extends React.Component {
           selectPoll={this.props.selectPoll}
         />
         <Modal
+          // this modal is for creating new poll
           isOpen={this.state.openModal}
-          toggle={this.toggleModal}
+          toggle={this.toggleModalCreatePollForm}
           unmountOnClose={true}
         >
-          <ModalHeader toggle={this.toggleModal}>Create A New Poll</ModalHeader>
+          <ModalHeader toggle={this.toggleModalCreatePollForm}>
+            Create A New Poll
+          </ModalHeader>
           <ModalBody>
-            <PollForm submit_Create_Update_Poll={this.props.addNewPoll} />
+            <PollForm
+              // this poll form is for creating new poll
+              addNewPoll={this.props.addNewPoll}
+              toggleModalCreatePollForm={this.toggleModalCreatePollForm}
+              pollOptions={this.props.pollOptions}
+            />
           </ModalBody>
         </Modal>
       </div>
@@ -55,6 +67,6 @@ SideBar.propTypes = {
   selectPoll: PropTypes.func.isRequired,
   searchTerm: PropTypes.string.isRequired,
   handleSearch: PropTypes.func.isRequired,
-  addNewPoll: PropTypes.func.isRequired
+  addNewPoll: PropTypes.func.isRequired,
 };
 export default SideBar;

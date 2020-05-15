@@ -12,12 +12,17 @@ class App extends React.Component {
     polls: [],
     selectedPoll: {}, // when we select an poll to see its detail information then it will use to keep that poll
     searchTerm: "", // searched text
+    selectedOption: '',
   };
 
   // use of life cycle method.. to populate the state property...
   componentDidMount() {
     this.setState({ polls: POLLS });
   }
+
+  toggleEditModal = () => {
+    this.setState({ openModal: !this.state.openModal });
+  };
 
   // CRUD OPEARATIONS
   addNewPoll = (poll) => {
@@ -27,18 +32,20 @@ class App extends React.Component {
     poll.opinions = [];
 
     // concate with the previous poll
-    this.setState({ polls: this.state.polls.concat(poll) }); // concat method works in immutable way and return a new array after adding new property...
+    this.setState({
+      polls: this.state.polls.concat(poll),
+    }); // concat method works in immutable way and return a new array after adding new property..
   };
 
-  updatePoll = (updatedPoll) => {
+  updatePoll = (selectedPoll) => {
     const copyPolls = [...this.state.polls]; // just creating a copy of the existing polls
     const foundPollForUpdate = copyPolls.find(
-      (singlePole) => singlePole.id === updatedPoll.id
-    ); // find the poll which poll id is same with the updated poll id...
+      (singlePole) => singlePole.id === selectedPoll.id
+    ); // find the poll which poll id is same with the selected poll id...
 
-    foundPollForUpdate.title = updatedPoll.title;
-    foundPollForUpdate.description = updatedPoll.description;
-    foundPollForUpdate.options = updatedPoll.options;
+    foundPollForUpdate.title = selectedPoll.title;
+    foundPollForUpdate.description = selectedPoll.description;
+    foundPollForUpdate.options = selectedPoll.options;
   };
 
   deletePoll = (deletedPollId) => {
@@ -91,6 +98,7 @@ class App extends React.Component {
       id: shortid.generate(),
       name: participantsRespones.name,
       selectedOption: participantsRespones.selectedOption,
+      selectedOptionValue: option.value
     };
 
     poll.opinions.push(opinion); // polls array has an opinions options. which collect all the opinion object
@@ -132,8 +140,10 @@ class App extends React.Component {
               updatePoll={this.updatePoll}
               deletePoll={this.deletePoll}
             />
+
           </Col>
         </Row>
+
       </Container>
     );
   }

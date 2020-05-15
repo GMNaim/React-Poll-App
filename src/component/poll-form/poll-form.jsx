@@ -67,9 +67,12 @@ const PollModalForm = ({
           Add Options
         </span>
       </Label>
+      {console.log(
+        options.length,
+        "length of option right before the options are created. "
+      )}
       {options.map((individualOption, optionIndex) => (
         <div key={individualOption.id} className="d-flex my-2">
-          {console.log("in div=============")}
           <Input
             value={individualOption.value}
             onChange={(event) => handlePollOptionChange(event, optionIndex)}
@@ -77,7 +80,9 @@ const PollModalForm = ({
               errors.options && errors.options[optionIndex] ? true : false
             } // checking if there is options inside the error obj and in options array if the index of the current option is exists
           />
-
+          {errors.options && (
+            <FormFeedback>{errors.options[optionIndex]}</FormFeedback>
+          )}
           <Button
             //   button for delete
             color="danger"
@@ -87,9 +92,6 @@ const PollModalForm = ({
           >
             Delete
           </Button>
-          {errors.options && (
-            <FormFeedback>{errors.options[optionIndex]}</FormFeedback>
-          )}
         </div>
       ))}
     </FormGroup>

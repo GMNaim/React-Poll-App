@@ -16,7 +16,7 @@ class PollForm extends React.Component {
     errors: {}, // to store all the errors in the validation func...
   };
 
-  // using life cycle method for showing the existing values to the input fields when we updating the poll... when we create the poll then the fileds are empty(state properties value is empty) but when we update a poll we can show the existing values by updating the state proerties using life cycle mehtod.
+  // using life cycle method for showing the existing values to the input fields when we updating the poll... when we create the poll then the fields are empty(state properties value is empty) but when we update a poll we can show the existing values by updating the state proerties using life cycle mehtod.
   componentDidMount() {
     const { poll } = this.props;
     if (poll && Object.keys(poll).length > 0) {
@@ -56,7 +56,6 @@ class PollForm extends React.Component {
         vote: 0,
       });
       this.setState({ options });
-      console.log("option created ==========");
     } else {
       alert("You can create maximum 5 options");
     }
@@ -84,22 +83,41 @@ class PollForm extends React.Component {
         options,
       };
       if (this.props.isUpdate) {
+        // ==========updating the poll =========
         //when we click edit to a poll then we pass the isUpdate=ture. if we want to update a poll then it should have an id to pass. so adding the id with the poll object.
         poll.id = this.props.poll.id;
         // and we have to call the update function to perform update operation...
         this.props.submit_Create_Update_Poll(poll);
 
         alert("Poll Updated Successfully.");
+        this.props.toggleModalEditForm(); // to close the modal form
       } else {
-        this.props.submit_Create_Update_Poll(poll);
+        // ======== creating new poll =========
+
+        const { title, description, options } = this.state;
+        console.log(options, '------------------options')
+        const poll = {
+          title,
+          description,
+          options,
+        };
+        this.props.addNewPoll(poll);
         event.target.reset(); // cleaning the form
-        this.setState({
-          // reseting the state properties.
-          title: "ddd",
-          description: "dddd",
-          options: defaultOptions,
-          errors: {},
-        });
+
+        this.setState(
+          {
+            // reseting the state properties.
+            title: "",
+            description: "",
+            errors: {},
+          },
+          () => {
+            this.setState({ options: defaultOptions })
+            alert('poll created')
+            this.props.toggleModalCreatePollForm(); // to close the modal form);
+          }
+        );
+        console.log(this.state.options, '------------------options after reset the state')
       }
     } else {
       this.setState({ errors });

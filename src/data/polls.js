@@ -6,7 +6,7 @@ const POLLS = [
     options: [
       {
         id: "unique id of each option",
-        value: "value of each option, like C Programming",
+        value: "C Programming",
         vote: 0,
       },
       {
