@@ -24,6 +24,7 @@ class SideBar extends React.Component {
             value={this.props.searchTerm}
             onChange={(event) => this.props.handleSearch(event.target.value)}
           />
+
           <Button
             color="success"
             className="ml-2"
@@ -31,6 +32,7 @@ class SideBar extends React.Component {
           >
             New
           </Button>
+
         </div>
 
         <h3>List of Polls</h3>
@@ -53,7 +55,6 @@ class SideBar extends React.Component {
               // this poll form is for creating new poll
               addNewPoll={this.props.addNewPoll}
               toggleModalCreatePollForm={this.toggleModalCreatePollForm}
-              pollOptions={this.props.pollOptions}
             />
           </ModalBody>
         </Modal>

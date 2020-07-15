@@ -5,12 +5,12 @@ import shortid from "shortid";
 import PollModalForm from "./poll-form";
 const defaultOptions = [
   // defaultly there will be 2 options.
-  { id: shortid.generate(), value: "", vote: 0 },
-  { id: shortid.generate(), value: "", vote: 0 },
+  { id: shortid.generate(), value: "dsfdsf", vote: 0 },
+  { id: shortid.generate(), value: "dsfsd", vote: 0 },
 ];
 class PollForm extends React.Component {
   state = {
-    title: "",
+    title: "32dsfds",
     description: "",
     options: defaultOptions,
     errors: {}, // to store all the errors in the validation func...
@@ -94,7 +94,7 @@ class PollForm extends React.Component {
       } else {
         // ======== creating new poll =========
 
-        const { title, description, options } = this.state;
+        // const { title, description, options } = this.state;
         console.log(options, '------------------options')
         const poll = {
           title,
@@ -107,13 +107,19 @@ class PollForm extends React.Component {
         this.setState(
           {
             // reseting the state properties.
-            title: "",
-            description: "",
+            title: "sdfds",
+            description: "dsfsdf",
             errors: {},
+            options: [
+              // defaultly there will be 2 options.
+              { id: shortid.generate(), value: "dsfdsf", vote: 0 },
+              { id: shortid.generate(), value: "dsfsd", vote: 0 },
+            ],
           },
           () => {
-            this.setState({ options: defaultOptions })
+            // this.setState({ options: defaultOptions })
             alert('poll created')
+            alert(this.state.title, this.state.description, this.state.errors, this.state.options, defaultOptions)
             this.props.toggleModalCreatePollForm(); // to close the modal form);
           }
         );
@@ -161,9 +167,12 @@ class PollForm extends React.Component {
     };
   };
 
+
   render() {
     const { title, description, options, errors } = this.state;
+
     return (
+
       <PollModalForm
         title={title}
         description={description}
@@ -176,6 +185,7 @@ class PollForm extends React.Component {
         deletePollOption={this.deletePollOption}
         handle_Create_Update_OnSubmit={this.handle_Create_Update_OnSubmit}
       />
+
     );
   }
 }
