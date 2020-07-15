@@ -7,11 +7,11 @@ This is a Poll application built with React.
 ###Screenshots
 ***
 * Poll Details
-![Screenshot 1](Screenshots/Screenshot 1.png)
+![Screenshot 1](Screenshots/Screenshot1.png)
 * Poll Add
-![Screenshot 2](Screenshots/Screenshot 2.png)
+![Screenshot 2](Screenshots/Screenshot2.png)
 * Poll Update
-![Screenshot 3](Screenshots/Screenshot 3.png)
+![Screenshot 3](Screenshots/Screenshot3.png)
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
