@@ -1,7 +1,7 @@
 # Project Title
 
 ## Poll Application
-This is a Poll application built React.
+This is a Poll application built with React.
 ***
 
 ###Screenshots
