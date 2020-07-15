@@ -1,4 +1,18 @@
-## React Poll App
+# Project Title
+
+## Poll Application
+This is a Poll application built React.
+***
+
+###Screenshots
+***
+* Poll Details
+![Screenshot 1](Screenshots/Screenshot 1.png)
+* Poll Add
+![Screenshot 2](Screenshots/Screenshot 2.png)
+* Poll Update
+![Screenshot 3](Screenshots/Screenshot 3.png)
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
